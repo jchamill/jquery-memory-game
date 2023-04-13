@@ -1,0 +1,33 @@
+{
+  "name": "jquery-memory-game",
+  "title": "jQuery Memory Game",
+  "version": "1.0.0",
+  "description": "Simple jQuery plugin to create a memory/match game.",
+  "main": "dist/jquery.memory-game.js",
+  "scripts": {
+    "sass": "node node_modules/gulp/bin/gulp.js sass",
+    "js": "node node_modules/gulp/bin/gulp.js js"
+  },
+  "author": {
+    "name": "JC Hamill",
+    "url": "https://jchamill.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-if": "^3.0.0",
+    "gulp-minify": "^3.1.0",
+    "gulp-sass": "^5.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "minimist": "^1.2.6",
+    "sass": "^1.42.1"
+  },
+  "keywords": [
+    "jquery",
+    "jquery-plugin",
+    "games",
+    "memory",
+    "matching"
+  ]
+}

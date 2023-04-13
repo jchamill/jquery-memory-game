@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Memory Game</title>
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #0c1514;
+        color: #fff;
+        padding: 25px;
+      }
+      img {
+        width: 100%;
+        height: auto;
+      }
+      #wrapper {
+        max-width: 1008px;
+        margin: 0 auto;
+      }
+      .game-tiles {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .game-tile {
+        cursor: pointer;
+        width: 140px;
+        height: 140px;
+        margin: 2px;
+        transform: rotate(0deg);
+        transition: transform 500ms ease-in-out;
+      }
+      .text-tile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      .game-complete .game-tile {
+        transform: rotate(360deg);
+      }
+      .game-tile-open,
+      .game-tile-matched {
+        cursor: default;
+      }
+      .game-tile-closed {
+        background: #89459a;
+      }
+      .game-tile-matched {
+        opacity: .75;
+      }
+      .game-complete .game-tile-matched {
+        opacity: 1;
+      }
+      .game-tile-viewed {
+        background: #61c6bd;
+      }
+      .game-tile-open {
+        background: #f2f2f2;
+        color: #000;
+      }
+      .game-status {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 10px;
+        font-size: 20px;
+      }
+      .game-restart {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="game">
+        <div class="memory-tile text-tile"><p>Uno</p></div>
+        <div class="memory-tile text-tile"><p>One</p></div>
+        <div class="memory-tile text-tile"><p>Dos</p></div>
+        <div class="memory-tile text-tile"><p>Two</p></div>
+        <div class="memory-tile text-tile"><p>Tres</p></div>
+        <div class="memory-tile text-tile"><p>Three</p></div>
+        <div class="memory-tile text-tile"><p>Quatro</p></div>
+        <div class="memory-tile text-tile"><p>Four</p></div>
+        <div class="memory-tile text-tile"><p>Cinco</p></div>
+        <div class="memory-tile text-tile"><p>Five</p></div>
+        <div class="memory-tile text-tile"><p>Seis</p></div>
+        <div class="memory-tile text-tile"><p>Six</p></div>
+        <div class="memory-tile text-tile"><p>Siete</p></div>
+        <div class="memory-tile text-tile"><p>Seven</p></div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../dist/jquery.memory-game-min.js"></script>
+    <script>
+      (function($) {
+        $(function() {
+          $('#game').memoryGame({
+            createDuplicates: false
+          });
+        });
+      })(jQuery);
+    </script>
+  </body>
+</html>

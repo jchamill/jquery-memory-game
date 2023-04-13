@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="../dist/jquery.memory-game.css" />
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #0c1514;
+        color: #fff;
+        padding: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="game">
+        <div class="memory-tile"><img src="https://picsum.photos/id/10/125/175"></div>
+        <div class="memory-tile"><img src="https://picsum.photos/id/1001/125/175"></div>
+        <div class="memory-tile"><img src="https://picsum.photos/id/1006/125/175"></div>
+        <div class="memory-tile"><img src="https://picsum.photos/id/1015/125/175"></div>
+        <div class="memory-tile"><img src="https://picsum.photos/id/102/125/175"></div>
+        <div class="memory-tile"><img src="https://picsum.photos/id/1023/125/175"></div>
+        <div class="memory-tile"><img src="https://picsum.photos/id/1011/125/175"></div>
+        <div class="memory-tile"><img src="https://picsum.photos/id/1065/125/175"></div>
+        <div class="memory-tile"><img src="https://picsum.photos/id/1083/125/175"></div>
+        <div class="memory-tile"><img src="https://picsum.photos/id/195/125/175"></div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../dist/jquery.memory-game-min.js"></script>
+    <script>
+      (function($) {
+        $(function() {
+          $('#game').memoryGame();
+        });
+      })(jQuery);
+    </script>
+  </body>
+</html>

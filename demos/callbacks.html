@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Memory Game</title>
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #F7F5EE;
+        color: #000;
+        padding: 5px;
+        margin: 0;
+      }
+      @media only screen and (min-width: 800px) {
+        body {
+          padding: 25px;
+        }
+      }
+      img {
+        width: 100%;
+        height: auto;
+        /* border-radius: 100%; */
+      }
+      #wrapper {
+        max-width: 1008px;
+        margin: 0 auto;
+      }
+      #game {
+        position: relative;
+      }
+      #overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #name-flash {
+        display: inline-block;
+        padding: 15px 25px;
+        transform: scale(0);
+        font-size: 36px;
+        background-color: #00110e;
+        color: #fff;
+      }
+      @keyframes zoom-in-out {
+        0% {
+          opacity: 0;
+          transform: scale(0);
+        }
+        10% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        90% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0);
+        }
+      }
+      @keyframes zoom-in {
+        0% {
+          opacity: 0;
+          transform: scale(0);
+        }
+        10% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      #game.clicked #name-flash {
+        animation: zoom-in-out 1800ms ease-in-out;
+      }
+      #finished {
+        display: none;
+        background-color: #025b4b;
+        color: #fff;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        /* transform: scale(0); */
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        pointer-events: all;
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      }
+      #finished:hover {
+        background-color: #F04F24;
+      }
+      .game-complete #finished {
+        display: flex;
+        animation: zoom-in 500ms ease-in-out;
+      }
+      .game-complete #name-flash {
+        display: none;
+      }
+      #final-score {
+        font-size: 100px;
+        font-weight: bold;
+        line-height: 0.9;
+      }
+      #play-again {
+        font-size: 12px;
+        margin-top: 20px;
+      }
+      .game-tiles {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .game-tile {
+        cursor: pointer;
+        width: calc(25% - 4px);
+        height: calc(25vw - 6px);
+        margin: 2px;
+        transform: rotate(0deg);
+        transition: transform 250ms ease-in-out;
+      }
+      @media only screen and (min-width: 675px) {
+        .game-tile {
+          width: calc(20% - 4px);
+          height: calc(20vw - 6px);
+        }
+      }
+      @media only screen and (min-width: 900px) {
+        .game-tile {
+          width: calc(16.6% - 4px);
+          height: calc(16.6vw - 6px);
+        }
+      }
+      @media only screen and (min-width: 1058px) {
+        .game-tile {
+          width: 140px;
+          height: 140px;
+        }
+      }
+      .game-complete .game-tile {
+        transform: rotate(360deg);
+      }
+      .game-tile-open,
+      .game-tile-matched {
+        cursor: default;
+      }
+      .game-tile-closed,
+      .game-tile-viewed {
+        background: url('bolt.svg') center center no-repeat;
+        background-size: 38px 14px;
+      }
+      .game-tile-closed {
+        background-color: #025b4b;
+      }
+      .game-tile-matched {
+        opacity: .75;
+      }
+      .game-complete .game-tile-matched {
+        opacity: 1;
+      }
+      .game-tile-viewed {
+        background-color: #F04F24;
+      }
+      .game-status {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 10px;
+        font-size: 20px;
+      }
+      #restart,
+      .game-restart {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="game">
+        <div class="memory-tile" data-name="Forest"><img src="https://picsum.photos/id/10/400/400"></div>
+        <div class="memory-tile" data-name="Beach"><img src="https://picsum.photos/id/1001/400/400"></div>
+        <div class="memory-tile" data-name="Rocks"><img src="https://picsum.photos/id/1006/400/400"></div>
+        <div class="memory-tile" data-name="River"><img src="https://picsum.photos/id/1015/400/400"></div>
+        <div class="memory-tile" data-name="Raspberries"><img src="https://picsum.photos/id/102/400/400"></div>
+        <div class="memory-tile" data-name="Mountain Bike"><img src="https://picsum.photos/id/1023/400/400"></div>
+        <div class="memory-tile" data-name="Canoe"><img src="https://picsum.photos/id/1011/400/400"></div>
+        <div class="memory-tile" data-name="Alley"><img src="https://picsum.photos/id/1065/400/400"></div>
+        <div class="memory-tile" data-name="Aerial"><img src="https://picsum.photos/id/1083/400/400"></div>
+        <div class="memory-tile" data-name="Night"><img src="https://picsum.photos/id/195/400/400"></div>
+        <div id="overlay">
+          <div id="name-flash"></div>
+          <div id="finished">
+            <div id="final-score"></div>
+            <div>Guesses</div>
+            <div id="play-again">Play Again</div>
+          </div>
+        </div>
+      </div>
+      <div class="game-status">
+        <div>Score: <span id="score">0</span></div>
+        <div id="restart">Restart</div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../dist/jquery.memory-game-min.js"></script>
+    <script>
+      (function($) {
+        $(function() {
+          var $game = $('#game'),
+              $nameFlash = $('#name-flash'),
+              $score = $('#score'),
+              $finalScore = $('#final-score'),
+              clickTimeout;
+          $game.memoryGame({
+            showScore: false,
+            showRestart: false,
+            tileClickedCallback: function(data) {
+              // console.log(data);
+              clearTimeout(clickTimeout);
+              $score.text(data.guesses);
+              $game.removeClass('clicked');
+              void $nameFlash[0].offsetWidth;
+              $game.addClass('clicked');
+              $nameFlash.text(data.tile._data.name);
+              clickTimeout = setTimeout(function() {
+                $game.removeClass('clicked');
+              }, 2000);
+            },
+            // mismatchedCallback: function(data) {
+            //   console.log(data);
+            // },
+            // matchedCallback: function(data) {
+            //   console.log(data.tile1._data.name);
+            // },
+            gameOverCallback: function(data) {
+              $finalScore.text(data.guesses);
+            },
+            restartCallback: function() {
+              $score.text('0');
+            }
+          });
+
+          $('#restart, #finished').click(function() {
+            $game.memoryGame.restart();
+          });
+        });
+      })(jQuery);
+    </script>
+  </body>
+</html>
