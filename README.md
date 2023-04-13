@@ -2,6 +2,8 @@
 
 A simple jQuery plugin to create a matching/memory game.
 
+[Demo](https://jchamill.com/projects/jquery-memory)
+
 ## Usage
 
 ### HTML
